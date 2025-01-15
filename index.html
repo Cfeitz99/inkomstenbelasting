@@ -1,58 +1,227 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-DNS-Prefetch-Control" content="off">
-  <title>Approval Confirmation</title>
-  <link href="https://fonts.googleapis.com/css?family=Axiforma" rel="stylesheet"> 
+  <title>Goedgekeurd - Bevestiging</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Favicon (optional) -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <!-- Axiforma from Google Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Axiforma&display=swap">
   <style>
-    body {
-      font-family: 'Axiforma', sans-serif;
-      color: #1f3c4e;
-      background-color: #f1f3f3;
+    /* Reset and Base Styles */
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-family: 'Axiforma', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      overflow: hidden;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      /* Replace this with your own background image */
+      background: url('images/background.jpg') center center / cover no-repeat;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      flex-direction: column;
+    }
+
+    /* Gradient Overlay */
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(31, 60, 78, 0.8), rgba(131, 212, 192, 0.7));
+      z-index: 1;
+    }
+
+    /* Main Container */
+    .container {
+      position: relative;
+      z-index: 2;
       text-align: center;
+      color: #fff;
+      max-width: 90%;
+      margin: 0 auto;
+      padding: 20px;
     }
 
+    /* Language Toggle Button */
+    .language-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: #ff6663;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 1em;
+      font-weight: bold;
+      cursor: pointer;
+      animation: fadeIn 1s ease-in-out forwards;
+      z-index: 3; /* Ensures it appears above overlay */
+    }
+    .language-toggle:hover {
+      background-color: #ff7b78;
+    }
+
+    /* Company Logo */
     .logo img {
-      max-width: 40%;
-      height: auto;
+      max-width: 220px;
+      margin-bottom: 30px;
+      animation: fadeIn 1s ease-in-out forwards;
+    }
+
+    /* Success Checkmark */
+    .checkmark {
+      display: inline-block;
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: #83D4C0;
+      margin: 0 auto 30px;
+      position: relative;
+      animation: bounceIn 1.2s ease-in-out forwards;
+    }
+    .checkmark:before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 18px;
+      height: 36px;
+      border: solid #fff;
+      border-width: 0 5px 5px 0;
+      transform: translate(-50%, -60%) rotate(45deg);
       opacity: 0;
-      animation: fadeInLogo 2s ease-in-out forwards;
+      animation: checkmarkStroke 0.5s 0.7s forwards ease-out;
     }
 
+    /* Headings and Text */
     h1 {
-      color: #83d4c0;
-      margin: 0;
+      font-size: 2.5em;
+      font-weight: bold;
+      margin-bottom: 20px;
+      animation: fadeInUp 1s ease-in-out forwards;
     }
-
     p {
-      color: #567385;
-      margin: 5px 0; /* Adjusted margin for closer spacing */
+      font-size: 1.2em;
+      margin-bottom: 10px;
+      animation: fadeInUp 1s ease-in-out forwards;
+      animation-delay: 0.3s;
+      color: #1f3c4e; /* Darker text for contrast */
+      background-color: rgba(255, 255, 255, 0.7);
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 8px;
     }
 
-    .accent {
-      color: #ff6663;
-      font-size: smaller; /* Smaller font for the English translation */
+    /* Keyframe Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
-
-    @keyframes fadeInLogo {
-      0% { opacity: 0; }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes bounceIn {
+      0%   { transform: scale(0.7); opacity: 0; }
+      50%  { transform: scale(1.05); opacity: 1; }
+      100% { transform: scale(1); }
+    }
+    @keyframes checkmarkStroke {
+      0%   { opacity: 0; }
       100% { opacity: 1; }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2em;
+      }
+      .checkmark {
+        width: 70px;
+        height: 70px;
+      }
+      .checkmark:before {
+        width: 14px;
+        height: 28px;
+      }
+    }
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.5em;
+      }
+      .checkmark {
+        width: 60px;
+        height: 60px;
+      }
+      .checkmark:before {
+        width: 12px;
+        height: 24px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="logo">
-    <img src="https://139550101.fs1.hubspotusercontent-eu1.net/hub/139550101/hubfs/TaxMate_Full_Logo_Regular-2.png?width=1120&upscale=true&name=TaxMate_Full_Logo_Regular-2.png" alt="Company Logo">
+  <div class="hero">
+    <div class="overlay"></div>
+
+    <!-- Language Toggle -->
+    <button class="language-toggle" onclick="toggleLanguage()">English</button>
+
+    <!-- Main Content Container -->
+    <div class="container">
+      <!-- Logo -->
+      <div class="logo">
+        <img 
+          src="https://139550101.fs1.hubspotusercontent-eu1.net/hub/139550101/hubfs/TaxMate_Full_Logo_Regular-2.png" 
+          alt="Company Logo"
+        />
+      </div>
+      <!-- Checkmark Animation -->
+      <div class="checkmark"></div>
+      <!-- Heading and Message -->
+      <h1 id="title">Bedankt voor je goedkeuring</h1>
+      <p id="message">We gaan de inkomstenbelastingaangifte voor je indienen</p>
+    </div>
   </div>
-  <h1>Bedankt voor je goedkeuring</h1>
-  <p class="accent">Thanks for your approval!</p>
+
+  <!-- JavaScript for Language Toggle -->
+  <script>
+    let currentLanguage = 'nl';
+
+    function toggleLanguage() {
+      const title = document.getElementById('title');
+      const message = document.getElementById('message');
+      const button = document.querySelector('.language-toggle');
+
+      if (currentLanguage === 'nl') {
+        // Switch to English
+        title.textContent = 'Thanks for your approval';
+        message.textContent = "We'll submit the income tax return for you";
+        button.textContent = 'Nederlands';
+        currentLanguage = 'en';
+      } else {
+        // Switch to Dutch
+        title.textContent = 'Bedankt voor je goedkeuring';
+        message.textContent = 'We gaan de inkomstenbelastingaangifte voor je indienen';
+        button.textContent = 'English';
+        currentLanguage = 'nl';
+      }
+    }
+  </script>
 </body>
 </html>
