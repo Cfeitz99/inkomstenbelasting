@@ -2,7 +2,7 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8">
-  <title>Goedgekeurd - Bevestiging</title>
+  <title>Akkoord inkomstenbelasting</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Favicon (optional) -->
   <link rel="icon" href="favicon.ico" type="image/x-icon">
@@ -56,26 +56,6 @@
       padding: 20px;
     }
 
-    /* Language Toggle Button */
-    .language-toggle {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background-color: #ff6663;
-      color: #fff;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      font-size: 1em;
-      font-weight: bold;
-      cursor: pointer;
-      animation: fadeIn 1s ease-in-out forwards;
-      z-index: 3; /* Ensures it appears above overlay */
-    }
-    .language-toggle:hover {
-      background-color: #ff7b78;
-    }
-
     /* Company Logo */
     .logo img {
       max-width: 220px;
@@ -122,9 +102,26 @@
       animation-delay: 0.3s;
       color: #1f3c4e; /* Darker text for contrast */
       background-color: rgba(255, 255, 255, 0.7);
-      display: inline-block;
+      display: block;
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
       padding: 10px 20px;
       border-radius: 8px;
+    }
+    .accent {
+      font-size: smaller; /* Smaller paragraph for the English translation */
+    }
+
+    button {
+      font: inherit;
+      color: #1f3c4e;
+      background-color: #83D4C0;
+      border: 0;
+      border-radius: 8px;
+      padding: 12px 24px;
+      margin: 16px 0;
+      cursor: pointer;
     }
 
     /* Keyframe Animations */
@@ -179,8 +176,6 @@
   <div class="hero">
     <div class="overlay"></div>
 
-    <!-- Language Toggle -->
-    <button class="language-toggle" onclick="toggleLanguage()">English</button>
 
     <!-- Main Content Container -->
     <div class="container">
@@ -191,37 +186,9 @@
           alt="Company Logo"
         />
       </div>
-      <!-- Checkmark Animation -->
-      <div class="checkmark"></div>
-      <!-- Heading and Message -->
-      <h1 id="title">Bedankt voor je goedkeuring</h1>
-      <p id="message">We gaan de inkomstenbelastingaangifte voor je indienen</p>
+      {{content}}
     </div>
   </div>
 
-  <!-- JavaScript for Language Toggle -->
-  <script>
-    let currentLanguage = 'nl';
-
-    function toggleLanguage() {
-      const title = document.getElementById('title');
-      const message = document.getElementById('message');
-      const button = document.querySelector('.language-toggle');
-
-      if (currentLanguage === 'nl') {
-        // Switch to English
-        title.textContent = 'Thanks for your approval';
-        message.textContent = "We'll submit the income tax return for you";
-        button.textContent = 'Nederlands';
-        currentLanguage = 'en';
-      } else {
-        // Switch to Dutch
-        title.textContent = 'Bedankt voor je goedkeuring';
-        message.textContent = 'We gaan de inkomstenbelastingaangifte voor je indienen';
-        button.textContent = 'English';
-        currentLanguage = 'nl';
-      }
-    }
-  </script>
 </body>
 </html>

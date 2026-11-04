@@ -4,7 +4,8 @@
   "description": "A simple server for handling webhook triggers and serving a static approval page.",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "node --test"
   },
   "dependencies": {
     "axios": "^0.27.2",
