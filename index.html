@@ -2,193 +2,191 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-DNS-Prefetch-Control" content="off">
   <title>Akkoord inkomstenbelasting</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Favicon (optional) -->
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
-  <!-- Axiforma from Google Fonts -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Axiforma&display=swap">
   <style>
-    /* Reset and Base Styles */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    /* The layout of the MyTaxMate customer page (features/customerPage), tokens from the TaxMate design system. */
+    @font-face { font-family: "Axiforma"; src: url("/assets/Axiforma-Regular.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+    @font-face { font-family: "Axiforma"; src: url("/assets/Axiforma-SemiBold.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+    @font-face { font-family: "Axiforma"; src: url("/assets/Axiforma-Bold.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+
+    :root {
+      --canvas: #F1F3F3;
+      --surface: #FFFFFF;
+      --navy: #1F3C4E;
+      --ink: #142D3D;
+      --body: #33505F;
+      --muted: #4B6674;
+      --mint: #83D4C0;
+      --mint-deep: #56B89F;
+      --mint-link: #256A59;
+      --tea: #BDE0D7;
     }
 
-    html {
-      font-family: 'Axiforma', sans-serif;
-      scroll-behavior: smooth;
-    }
+    * { box-sizing: border-box; }
 
     body {
-      overflow: hidden;
+      margin: 0;
+      background: var(--canvas);
+      color: var(--body);
+      font-family: "Axiforma", "Avenir Next", "Segoe UI", Arial, Helvetica, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
     }
 
-    /* Hero Section */
-    .hero {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-      /* Replace this with your own background image */
-      background: url('images/background.jpg') center center / cover no-repeat;
+    .frame { display: flex; gap: 32px; min-height: 100dvh; padding: 40px; }
+
+    .side {
+      flex: 1 1 420px;
       display: flex;
-      justify-content: center;
-      align-items: center;
+      flex-direction: column;
+      gap: 40px;
+      min-width: 0;
+      padding: 40px;
+      border-radius: 20px;
+      background: var(--navy) url("/assets/bg-lines.jpg") center / cover no-repeat;
+      color: #FFFFFF;
     }
 
-    /* Gradient Overlay */
-    .overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(31, 60, 78, 0.8), rgba(131, 212, 192, 0.7));
-      z-index: 1;
-    }
+    .logo { display: block; height: 36px; width: auto; align-self: flex-start; }
 
-    /* Main Container */
-    .container {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      color: #fff;
-      max-width: 90%;
-      margin: 0 auto;
+    .label { margin: 0; font-size: 40px; font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; }
+
+    .period { margin: 8px 0 0; color: rgba(255, 255, 255, 0.75); }
+
+    .info {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: auto;
       padding: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.08);
+      font-size: 15px;
+      line-height: 1.55;
     }
 
-    /* Company Logo */
-    .logo img {
-      max-width: 220px;
-      margin-bottom: 30px;
-      animation: fadeIn 1s ease-in-out forwards;
+    .info p { display: flex; gap: 12px; margin: 0; color: rgba(255, 255, 255, 0.88); }
+    .info svg { flex: none; margin-top: 2px; color: var(--mint); }
+    .info a { color: var(--mint); font-weight: 600; }
+
+    .below { display: none; }
+
+    .card {
+      flex: 1 1 560px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-width: 0;
+      padding: 56px;
+      border-radius: 20px;
+      background: var(--surface);
     }
 
-    /* Success Checkmark */
-    .checkmark {
-      display: inline-block;
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      background: #83D4C0;
-      margin: 0 auto 30px;
-      position: relative;
-      animation: bounceIn 1.2s ease-in-out forwards;
-    }
-    .checkmark:before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 18px;
-      height: 36px;
-      border: solid #fff;
-      border-width: 0 5px 5px 0;
-      transform: translate(-50%, -60%) rotate(45deg);
-      opacity: 0;
-      animation: checkmarkStroke 0.5s 0.7s forwards ease-out;
-    }
+    .content { width: 100%; max-width: 520px; margin: 0 auto; }
 
-    /* Headings and Text */
     h1 {
-      font-size: 2.5em;
-      font-weight: bold;
-      margin-bottom: 20px;
-      animation: fadeInUp 1s ease-in-out forwards;
+      margin: 0 0 12px;
+      color: var(--ink);
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
     }
-    p {
-      font-size: 1.2em;
-      margin-bottom: 10px;
-      animation: fadeInUp 1s ease-in-out forwards;
-      animation-delay: 0.3s;
-      color: #1f3c4e; /* Darker text for contrast */
-      background-color: rgba(255, 255, 255, 0.7);
-      display: block;
-      width: fit-content;
-      margin-left: auto;
-      margin-right: auto;
-      padding: 10px 20px;
-      border-radius: 8px;
+
+    p { margin: 0 0 8px; }
+
+    .steps { display: flex; flex-direction: column; gap: 16px; margin: 32px 0 0; padding: 0; list-style: none; counter-reset: step; }
+
+    .steps li { display: flex; align-items: flex-start; gap: 14px; color: var(--ink); counter-increment: step; }
+
+    .steps li::before {
+      content: counter(step);
+      flex: none;
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      background: var(--tea);
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 30px;
+      text-align: center;
     }
-    .accent {
-      font-size: smaller; /* Smaller paragraph for the English translation */
-    }
+
+    .steps li span { padding-top: 3px; }
+
+    .accent, .help { margin: 16px 0 0; color: var(--muted); font-size: 14px; }
+
+    .help a { color: var(--mint-link); font-weight: 600; }
+
+    form { margin: 32px 0 0; }
 
     button {
-      font: inherit;
-      color: #1f3c4e;
-      background-color: #83D4C0;
-      border: 0;
-      border-radius: 8px;
+      width: 100%;
+      min-height: 48px;
       padding: 12px 24px;
-      margin: 16px 0;
+      border: 0;
+      border-radius: 12px;
+      background: var(--mint);
+      color: var(--ink);
+      font: inherit;
+      font-weight: 600;
       cursor: pointer;
     }
 
-    /* Keyframe Animations */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes bounceIn {
-      0%   { transform: scale(0.7); opacity: 0; }
-      50%  { transform: scale(1.05); opacity: 1; }
-      100% { transform: scale(1); }
-    }
-    @keyframes checkmarkStroke {
-      0%   { opacity: 0; }
-      100% { opacity: 1; }
-    }
+    button:hover { background: var(--mint-deep); }
+    button:focus-visible, a:focus-visible { outline: 0; box-shadow: 0 0 0 3px rgba(131, 212, 192, 0.45); }
 
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 2em;
-      }
-      .checkmark {
-        width: 70px;
-        height: 70px;
-      }
-      .checkmark:before {
-        width: 14px;
-        height: 28px;
-      }
-    }
-    @media (max-width: 480px) {
-      h1 {
-        font-size: 1.5em;
-      }
-      .checkmark {
-        width: 60px;
-        height: 60px;
-      }
-      .checkmark:before {
-        width: 12px;
-        height: 24px;
-      }
+    @media (max-width: 900px) {
+      .frame { flex-direction: column; gap: 16px; min-height: 0; padding: 16px; }
+      .side { flex: none; gap: 24px; padding: 24px; }
+      .logo { height: 28px; }
+      .label { font-size: 30px; }
+      .card { flex: none; padding: 24px; }
+      .side .info { display: none; }
+      .below { display: flex; margin-top: 0; border-color: rgba(31, 60, 78, 0.08); background: var(--surface); }
+      .below p { color: var(--body); }
+      .below svg { color: var(--mint-link); }
+      .below a { color: var(--mint-link); }
     }
   </style>
 </head>
 <body>
-  <div class="hero">
-    <div class="overlay"></div>
-
-
-    <!-- Main Content Container -->
-    <div class="container">
-      <!-- Logo -->
-      <div class="logo">
-        <img 
-          src="https://139550101.fs1.hubspotusercontent-eu1.net/hub/139550101/hubfs/TaxMate_Full_Logo_Regular-2.png" 
-          alt="Company Logo"
-        />
+  <div class="frame">
+    <aside class="side">
+      <img class="logo" src="/assets/TaxMate_Full_Logo_White.png" alt="TaxMate">
+      <div>
+        <p class="label">{{label}}</p>{{period}}
       </div>
-      {{content}}
+      <div class="info">
+        <p>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+          <span>{{safe}}</span>
+        </p>
+        <p>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <span>{{questions}}</span>
+        </p>
+      </div>
+    </aside>
+    <main class="card">
+      <div class="content">
+        {{content}}
+      </div>
+    </main>
+    <div class="info below">
+      <p>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+        <span>{{safe}}</span>
+      </p>
+      <p>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <span>{{questions}}</span>
+      </p>
     </div>
   </div>
-
 </body>
 </html>
